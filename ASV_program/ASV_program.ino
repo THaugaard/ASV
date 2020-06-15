@@ -52,18 +52,18 @@ float lambda = 0;
 float lambda_ref = 0;
 
 //Constants for the discretized controllers
-//float B0_w = 64.63;  Previous value before changing frequency
-float B0_w = 6.47;
-//float B1_w = -56.11;  Previous value before changing frequency
-float B1_w = 5.61;
-//float B0_v = 165.47;  Previous value before changing frequency
-float B0_v = 16.54;
-//float B1_v = -165.3;  Previous value before changing frequency
-float B1_v = 16.54;
-//float B0_B = -0.6;  Previous value before changing frequency
-float B0_B = 0.06;
-//float B0_D = 0.6; Previous value before changing frequency
-float B0_D = 0.06;
+float B0_w = 64.63;
+//float B0_w = 6.47;
+float B1_w = -56.11;
+//float B1_w = 5.61;
+float B0_v = 165.47;
+//float B0_v = 16.54;
+float B1_v = -165.3;
+//float B1_v = 16.54;
+float B0_B = -0.6;
+//float B0_B = 0.06;
+float B0_D = 0.6;
+//float B0_D = 0.06;
 
 //Counter for timer 2 interrupts
 int counter = 0;
@@ -77,7 +77,7 @@ int flag_GPSNoData = 0;
 //Other
 double R = 6371;
 
-double _waypointArray[3][2] = {{1, 1}, {57.0159560, 9.9853338}, {57.0161098, 9.9853254}};
+double _waypointArray[3][2] = {{1, 1}, {57.0241253, 9.9471116}, {57.0240025, 9.9473131}};
 //double _waypointArray[4][2] = {{1, 1}, {57.0157285, 9.9858467}, {57.0159567, 9.9860624}, {57.0159916, 9.9858370}}; // Containes starting location, final destination (4 coordinates, 2 parts to each)
 void _reversePointer();   // Changes between incrementing and decrementing
 bool _pointerDir = 1;     // Determines whether pointer increments or decrements

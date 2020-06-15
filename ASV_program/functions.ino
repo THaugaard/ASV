@@ -45,9 +45,9 @@ void navSetup() {
   Serial.println("Done");
 
   int startLocationSaved = 0;
-
+  long timeLast = millis();
   while (startLocationSaved != 1) {
-    long timeNow, timeLast;
+    long timeNow;
     int isRun = 0;
     while (gps.available(gps_Port)) {
       isRun = 1;
@@ -256,6 +256,11 @@ void setSaturations_ut() {
   if (ut < Umin) ut = Umin;
 }
 
+void setSaturations_ur(){
+  if (ur > Umax) ur = Umax;
+  if (ur < Umin) ur = Umin;
+}
+
 void generatePWM() {
   if (u1 >= 0) {
     u1 = mapfloat(u1, 0, Umax, 1500, 2250);
@@ -302,6 +307,7 @@ void controller() {
 
     e_v = (v_ref - v);
     ut = ut_prev + B0_v * e_v - B1_v * e_v_prev;
+    if (ut > Umax || ut < Umin) ut = 165.35 * e_v; 
 
     setSaturations_ut();
 
@@ -310,6 +316,8 @@ void controller() {
     if (e_B <= 0) // Turn left
     {
       ur = ur_prev - B0_w * e_w + B1_w * e_w_prev;
+      if (ur > Umax || ur < Umin) ur = 60.42 * e_w;
+      setSaturations_ur();
       u1 = ut - ur;
       u2 = ut;
       turnRight = 0;
@@ -318,6 +326,8 @@ void controller() {
     if (e_B > 0)  // Turn right
     {
       ur = ur_prev + B0_w * e_w - B1_w * e_w_prev;
+      if (ur > Umax || ur < Umin) ur = -60.42 * e_w;
+      setSaturations_ur();
       u1 = ut;
       u2 = ut - ur;
       turnRight = 1;
